@@ -1,3 +1,7 @@
+// TODO: interaction with db
+
+export async function connect() {}
+
 export async function dbQuery(sql: string, args?: any[]): Promise<any> {}
 
 export async function login(usr: string, pass: string) {
