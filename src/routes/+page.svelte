@@ -1,0 +1,36 @@
+<script lang="ts">
+	import { resolve } from '$app/paths';
+	import { authClient } from '$lib/auth-client';
+
+	const { data } = $props();
+	const session = $derived(data.session);
+	const user = $derived(data.user);
+</script>
+
+<nav class="flex h-fit w-full justify-between bg-(--bg2) p-4">
+	<div>
+		<h1>FRC Shit Trading</h1>
+	</div>
+	<div>
+		{#if session && user}
+			<a href={resolve(`/user/${user.name}`)} aria-label="User profile">
+				<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+					<path d="M0 0h24v24H0z" fill="none" />
+					<path
+						fill="var(--text)"
+						d="M12 6c-2.28 0-4 1.72-4 4s1.72 4 4 4s4-1.72 4-4s-1.72-4-4-4m0 6c-1.18 0-2-.82-2-2s.82-2 2-2s2 .82 2 2s-.82 2-2 2"
+					/>
+					<path
+						fill="var(--text)"
+						d="M12 2C6.49 2 2 6.49 2 12c0 3.26 1.58 6.16 4 7.98V20h.03c1.67 1.25 3.73 2 5.97 2s4.31-.75 5.97-2H18v-.02c2.42-1.83 4-4.72 4-7.98c0-5.51-4.49-10-10-10M8.18 19.02C8.59 17.85 9.69 17 11 17h2c1.31 0 2.42.85 2.82 2.02c-1.14.62-2.44.98-3.82.98s-2.69-.35-3.82-.98m9.3-1.21c-.81-1.66-2.51-2.82-4.48-2.82h-2c-1.97 0-3.66 1.16-4.48 2.82A7.96 7.96 0 0 1 4 11.99c0-4.41 3.59-8 8-8s8 3.59 8 8c0 2.29-.97 4.36-2.52 5.82"
+					/>
+				</svg>
+			</a>
+		{:else}
+			<button
+				class="button-primary"
+				onclick={() => authClient.signIn.social({ provider: 'discord' })}>Sign In</button
+			>
+		{/if}
+	</div>
+</nav>
