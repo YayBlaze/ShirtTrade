@@ -6,8 +6,8 @@
 	--bg2: #252525;
 	--text: #e8f3f1;
 	--neutral: #a7a7a7;
-	--primary: #ee2c2c;
-	--secondary: #6495ed;
+	--secondary: #ee2c2c;
+	--primary: #6495ed;
 	--success: #50c878;
 	--error: #ee2c2c;
 	--warning: #e6c77d;
@@ -22,7 +22,17 @@ body {
 	font-style: normal;
 }
 
-.button-primary {
+button:disabled {
+	border: 1px solid var(--neutral);
+	color: var(--neutral);
+	background: none;
+}
+button:disabled:hover {
+	background: none;
+	color: var(--neutral);
+}
+
+.button-secondary {
 	height: fit-content;
 	border: 1px solid var(--text);
 	border-radius: 10px;
@@ -33,7 +43,43 @@ body {
 	transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
 	transition-duration: 200ms;
 }
-.button-primary:hover {
+.button-secondary:hover {
 	background-color: var(--bg2);
 	color: var(--text);
+	scale: 105%;
+}
+
+.button-primary {
+	height: fit-content;
+	border: 1px solid var(--primary);
+	border-radius: 10px;
+	background-color: var(--primary);
+	padding: 0.5rem;
+	color: var(--bg);
+	transition-property: color, background-color;
+	transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+	transition-duration: 200ms;
+}
+.button-primary:hover {
+	background-color: var(--bg2);
+	color: var(--primary);
+	scale: 105%;
+}
+
+.button-destructive {
+	height: fit-content;
+	border: 1px solid var(--bg2);
+	border-radius: 10px;
+	background-color: var(--bg2);
+	padding: 0.5rem;
+	color: var(--text);
+	transition-property: color, background-color, border;
+	transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+	transition-duration: 200ms;
+}
+.button-destructive:hover {
+	background-color: var(--bg2);
+	border: 1px solid var(--error);
+	color: var(--error);
+	scale: 105%;
 }

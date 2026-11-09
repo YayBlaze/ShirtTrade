@@ -3,6 +3,7 @@ import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { sveltekitCookies } from 'better-auth/svelte-kit';
 import { getRequestEvent } from '$app/server';
 import { db } from '$lib/server/db';
+import { admin } from 'better-auth/plugins';
 import {
 	BETTER_AUTH_SECRET,
 	DISCORD_CLIENT_ID,
@@ -18,7 +19,12 @@ export const auth = betterAuth({
 	socialProviders: {
 		discord: {
 			clientId: DISCORD_CLIENT_ID,
-			clientSecret: DISCORD_CLIENT_SECRET
+			clientSecret: DISCORD_CLIENT_SECRET,
+			mapProfileToUser: async () => {
+				return {
+					teamNumber: 0
+				};
+			}
 		}
 	},
 	user: {
@@ -27,6 +33,7 @@ export const auth = betterAuth({
 		}
 	},
 	plugins: [
+		admin(),
 		sveltekitCookies(getRequestEvent) // make sure this is the last plugin in the array
 	]
 });

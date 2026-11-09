@@ -1,4 +1,4 @@
-import { pgEnum, pgTable, smallint, text, uuid } from 'drizzle-orm/pg-core';
+import { boolean, pgEnum, pgTable, smallint, text, uuid } from 'drizzle-orm/pg-core';
 import { user } from './auth.schema';
 export * from './auth.schema';
 
@@ -28,6 +28,7 @@ export const inventory = pgTable('user_profile', {
 		.references(() => user.id, { onDelete: 'cascade' }),
 	teamNumber: smallint('team_number').notNull(),
 	itemType: item_type().notNull(),
+	tradeability: smallint().notNull().default(5),
 	size: size().notNull(),
 	description: text(),
 	year: text(),
@@ -41,5 +42,9 @@ export const inventory = pgTable('user_profile', {
 export const teams = pgTable('teams', {
 	number: smallint('team_number').primaryKey().notNull(),
 	name: text('team_name').notNull(),
-	namValue: smallint('nam_value').notNull()
+	image: text('image'),
+	namValue: smallint('nam_value').notNull(),
+	active: boolean('active').notNull().default(true),
+	primaryColor: text('primary_color'),
+	secondaryColor: text('secondary_color')
 });
